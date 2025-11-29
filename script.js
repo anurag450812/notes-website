@@ -15,7 +15,7 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
     recognition = new SpeechRecognition();
     recognition.continuous = true; // Keep listening
     recognition.interimResults = true; // Show results as they are spoken
-    recognition.lang = 'en-US';
+    recognition.lang = 'hi-IN';
 
     recognition.onresult = (event) => {
         if (currentVoiceInput) {
