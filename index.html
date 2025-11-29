@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>My Notes</h1>
+            <button id="add-section-btn" class="secondary-btn"><i class="fas fa-plus"></i> New Section</button>
+        </header>
+
+        <main id="sections-container">
+            <!-- Sections will be dynamically generated here -->
+        </main>
+    </div>
+
+    <!-- Template for Section -->
+    <template id="section-template">
+        <section class="note-section">
+            <div class="section-header">
+                <h2 class="section-title">Section Title</h2>
+                <div class="section-actions">
+                    <button class="clear-checked-btn" title="Delete Checked Notes"><i class="fas fa-broom"></i></button>
+                    <button class="delete-section-btn" title="Delete Section"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="text" class="note-input" placeholder="Add a new note...">
+                <button class="voice-btn" title="Voice to Text"><i class="fas fa-microphone"></i></button>
+                <button class="add-note-btn"><i class="fas fa-plus"></i></button>
+            </div>
+            <ul class="notes-list">
+                <!-- Notes will go here -->
+            </ul>
+        </section>
+    </template>
+
+    <!-- Template for Note -->
+    <template id="note-template">
+        <li class="note-item">
+            <div class="note-content">
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" class="note-checkbox">
+                    <span class="custom-checkbox"></span>
+                </div>
+                <span class="note-text"></span>
+            </div>
+            <button class="delete-note-btn" title="Delete Note (Double Click)"><i class="fas fa-trash-alt"></i></button>
+        </li>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
