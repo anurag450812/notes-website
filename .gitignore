@@ -15,3 +15,9 @@ npm-debug.log*
 
 # Optional: if you add node_modules later
 node_modules/
+
+# Netlify
+.netlify/
+dist/
+.env
+.env.local

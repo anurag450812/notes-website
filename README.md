@@ -1,6 +1,6 @@
 # Notes Website
 
-A beautiful, responsive notes application with voice-to-text functionality and a premium dark mode design.
+A beautiful, responsive notes application with voice-to-text functionality, premium dark mode design, and cloud sync via Netlify Blobs.
 
 ## Features
 
@@ -9,7 +9,8 @@ A beautiful, responsive notes application with voice-to-text functionality and a
 - ✅ **Task Management**: Check off completed notes (they automatically move to the bottom)
 - 🗑️ **Easy Deletion**: Two-click deletion for individual notes, or clear all checked notes at once
 - 📂 **Custom Sections**: Create unlimited sections to organize your notes
-- 💾 **Auto-Save**: All notes are automatically saved to your browser's local storage
+- ☁️ **Cloud Sync**: All notes are stored in Netlify Blobs for seamless sync across devices
+- 💾 **Auto-Save**: All changes are automatically saved to the cloud
 - 🎨 **Premium Design**: Beautiful dark mode with glassmorphism effects
 - 📱 **Responsive**: Works perfectly on both desktop and mobile devices
 
@@ -29,35 +30,57 @@ A beautiful, responsive notes application with voice-to-text functionality and a
 - CSS3 (with Glassmorphism effects)
 - Vanilla JavaScript
 - Web Speech API for voice recognition
-- LocalStorage for data persistence
+- Netlify Blobs for cloud storage
+- Netlify Functions for serverless API
 - Font Awesome for icons
 - Google Fonts (Outfit)
 
-## Installation
+## Deployment on Netlify
 
-Simply open `index.html` in a modern web browser. No build process or dependencies required!
+### Prerequisites
+- A [Netlify](https://www.netlify.com/) account
+- Git repository (GitHub, GitLab, or Bitbucket)
+
+### Steps to Deploy
+
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+2. **Push to Git Repository**
+   ```bash
+   git add .
+   git commit -m "Add Netlify Blobs storage"
+   git push
+   ```
+
+3. **Deploy to Netlify**
+   - Go to [Netlify](https://app.netlify.com/)
+   - Click "Add new site" → "Import an existing project"
+   - Connect your Git repository
+   - Netlify will automatically detect the settings from `netlify.toml`
+   - Click "Deploy site"
+
+4. **That's it!** Your notes app is now live with cloud storage. All users will have their notes synced across devices.
+
+## Local Development
+
+To run with a local server (recommended for testing):
+
+```bash
+# Install dependencies
+npm install
+
+# Run Netlify Dev (includes functions)
+npm run dev
+```
+
+This will start the development server at `http://localhost:8888` with Netlify Functions enabled.
 
 For the best experience with voice-to-text:
 - Use a Chromium-based browser (Chrome, Edge, Brave)
 - Allow microphone permissions when prompted
-- For persistent permissions, serve the site over HTTPS or use a local server
-
-## Local Development
-
-To run with a local server (recommended for voice features):
-
-```bash
-# Using Python
-python -m http.server 8000
-
-# Using Node.js
-npx serve
-
-# Using PHP
-php -S localhost:8000
-```
-
-Then open `http://localhost:8000` in your browser.
 
 ## Browser Compatibility
 

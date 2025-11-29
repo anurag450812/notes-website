@@ -1,8 +1,9 @@
 // State Management
-let sections = JSON.parse(localStorage.getItem('notesSections')) || [
-    { id: 'important', title: 'Important Notes', notes: [] },
-    { id: 'timepass', title: 'Time Pass Notes', notes: [] }
-];
+let sections = [];
+let isLoading = true;
+
+// API Configuration
+const API_URL = '/api/notes';
 
 // Global Voice Recognition Setup
 let recognition;
@@ -129,14 +130,51 @@ const sectionTemplate = document.getElementById('section-template');
 const noteTemplate = document.getElementById('note-template');
 
 // Initialize App
-function init() {
+async function init() {
+    showLoading();
+    await loadSections();
+    hideLoading();
     renderSections();
     addSectionBtn.addEventListener('click', createNewSection);
 }
 
-// Save to LocalStorage
-function saveState() {
-    localStorage.setItem('notesSections', JSON.stringify(sections));
+// Load sections from Netlify Blobs
+async function loadSections() {
+    try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+            throw new Error('Failed to load notes');
+        }
+        sections = await response.json();
+    } catch (error) {
+        console.error('Error loading sections:', error);
+        // Fallback to default sections if load fails
+        sections = [
+            { id: 'important', title: 'Important Notes', notes: [] },
+            { id: 'timepass', title: 'Time Pass Notes', notes: [] }
+        ];
+        alert('Failed to load notes from server. Using default sections.');
+    }
+}
+
+// Save to Netlify Blobs
+async function saveState() {
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sections)
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to save notes');
+        }
+    } catch (error) {
+        console.error('Error saving sections:', error);
+        alert('Failed to save notes to server. Your changes may be lost.');
+    }
 }
 
 // Render all sections
@@ -387,3 +425,18 @@ function createNewSection() {
 
 // Start
 init();
+
+// Loading UI Functions
+function showLoading() {
+    const loadingDiv = document.createElement('div');
+    loadingDiv.id = 'loading-overlay';
+    loadingDiv.innerHTML = '<div class="loading-spinner">Loading notes...</div>';
+    document.body.appendChild(loadingDiv);
+}
+
+function hideLoading() {
+    const loadingDiv = document.getElementById('loading-overlay');
+    if (loadingDiv) {
+        loadingDiv.remove();
+    }
+}
